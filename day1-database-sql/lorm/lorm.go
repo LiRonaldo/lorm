@@ -1,4 +1,4 @@
-package main
+package lorm
 
 import (
 	"database/sql"
