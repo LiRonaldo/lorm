@@ -8,6 +8,7 @@ import (
 	"strings"
 )
 
+//将表名赋给s.reftable
 func (s *Session) Model(value interface{}) *Session {
 	if s.refTable == nil || reflect.TypeOf(value) != reflect.TypeOf(s.refTable.Model) {
 		s.refTable = schema.Parse(value, s.dialect)
@@ -20,6 +21,8 @@ func (s *Session) RefTable() *schema.Schema {
 	}
 	return s.refTable
 }
+
+//创建表，根据传入的strcut 返回一个schema ，循环属性，利用语法进行拼接
 func (s *Session) CreateTable() error {
 	table := s.RefTable()
 	var columns []string
