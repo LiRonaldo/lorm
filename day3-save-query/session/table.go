@@ -46,3 +46,12 @@ func (s *Session) HasTable() bool {
 	_ = row.Scan(&tmp)
 	return tmp == s.RefTable().Name
 }
+
+//查询方法，
+//传进去一个切片指针，将查询后的数据保存到切片，不用返回这个切片，
+//此处为啥不传切片，而是 要传切片的 指针。因为当吧切片传过去之后，
+//如果发生了扩容，是不会影响外部的切片的。也就是外部打印还是发生
+//扩容之前的切片。
+func (s *Session) Find(value interface{}) error {
+
+}
