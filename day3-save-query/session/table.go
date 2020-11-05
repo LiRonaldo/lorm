@@ -2,8 +2,8 @@ package session
 
 import (
 	"fmt"
-	"lorm/day2-reflect-schema/log"
-	"lorm/day2-reflect-schema/schema"
+	"lorm/day3-save-query/log"
+	"lorm/day3-save-query/schema"
 	"reflect"
 	"strings"
 )

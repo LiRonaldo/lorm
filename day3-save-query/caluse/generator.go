@@ -41,9 +41,22 @@ func _select(values ...interface{}) (s string, i []interface{}) {
 }
 
 func _values(values ...interface{}) (s string, i []interface{}) {
-	// VALUES ($v1), ($v2), ...
-
-	return
+	var bindStr string
+	var sql strings.Builder
+	var vars []interface{}
+	sql.WriteString("VALUES ")
+	for i, value := range values {
+		v := value.([]interface{})
+		if bindStr == "" {
+			bindStr = genBindVars(len(v))
+		}
+		sql.WriteString(fmt.Sprintf("(%v)", bindStr))
+		if i+1 != len(values) {
+			sql.WriteString(", ")
+		}
+		vars = append(vars, v...)
+	}
+	return sql.String(), vars
 }
 
 func _insert(values ...interface{}) (s string, i []interface{}) {

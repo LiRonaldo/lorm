@@ -1,12 +1,13 @@
 package schema
 
 import (
-	"lorm/day2-reflect-schema/dialect"
+	"lorm/day3-save-query/dialect"
+
 	"testing"
 )
 
 type User struct {
-	Name string `lorm:"PRIMARY KEY"`
+	Name string
 	Age  int
 }
 

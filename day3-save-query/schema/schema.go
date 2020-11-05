@@ -2,7 +2,7 @@ package schema
 
 import (
 	"go/ast"
-	"lorm/day2-reflect-schema/dialect"
+	"lorm/day3-save-query/dialect"
 	"reflect"
 )
 
@@ -51,4 +51,14 @@ func Parse(dest interface{}, d dialect.Dialect) *Schema {
 		}
 	}
 	return schema
+}
+
+//将元素平铺，比如user 变成 u1，("Tom", 18)
+func (s *Schema) RecordValues(dest interface{}) []interface{} {
+	destValues := reflect.Indirect(reflect.ValueOf(dest))
+	var fieldValues []interface{}
+	for _, field := range s.Fields {
+		fieldValues = append(fieldValues, destValues.FieldByName(field.Name).Interface())
+	}
+	return fieldValues
 }

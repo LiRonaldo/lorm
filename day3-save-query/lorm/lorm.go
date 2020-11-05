@@ -3,9 +3,9 @@ package lorm
 import (
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
-	"lorm/day2-reflect-schema/dialect"
-	"lorm/day2-reflect-schema/log"
-	"lorm/day2-reflect-schema/session"
+	"lorm/day3-save-query/dialect"
+	"lorm/day3-save-query/log"
+	"lorm/day3-save-query/session"
 )
 
 type Engine struct {

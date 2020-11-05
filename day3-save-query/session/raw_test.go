@@ -21,9 +21,9 @@ var (
 func TestSession_Exec(t *testing.T) {
 	db, _ := sql.Open("mysql", "root:123456@tcp(localhost:3306)/lorm?charset=utf8")
 	TestDial, _ := dialect.GetDialect("mysql")
-	s := New(db, TestDial).Model(&User{})
-	_ = s.DropTable()
-	_ = s.CreateTable()
+	s := New(db, TestDial).Model(&User{}).refTable
+	values := s.RecordValues(user1)
+	fmt.Println(values)
 }
 func Test_Init(t *testing.T) {
 	db, _ := sql.Open("sqlite3", "../../gweb.db")

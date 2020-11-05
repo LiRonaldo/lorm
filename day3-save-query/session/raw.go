@@ -3,10 +3,10 @@ package session
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
-	"lorm/day1-database-sql/log"
-	"lorm/day2-reflect-schema/dialect"
-	"lorm/day2-reflect-schema/schema"
 	"lorm/day3-save-query/caluse"
+	"lorm/day3-save-query/dialect"
+	"lorm/day3-save-query/log"
+	"lorm/day3-save-query/schema"
 	"strings"
 )
 
