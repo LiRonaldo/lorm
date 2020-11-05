@@ -21,6 +21,7 @@ func init() {
 }
 
 func _orderby(values ...interface{}) (s string, i []interface{}) {
+	return fmt.Sprintf("order by %s", values[0]), []interface{}{}
 	return
 }
 

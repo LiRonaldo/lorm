@@ -6,6 +6,7 @@ import (
 	"lorm/day1-database-sql/log"
 	"lorm/day2-reflect-schema/dialect"
 	"lorm/day2-reflect-schema/schema"
+	"lorm/day3-save-query/caluse"
 	"strings"
 )
 
@@ -15,6 +16,7 @@ type Session struct {
 	sqlVars  []interface{}
 	dialect  dialect.Dialect
 	refTable *schema.Schema
+	caluse   caluse.Caluse
 }
 
 func New(db *sql.DB, dialect dialect.Dialect) *Session {
@@ -24,6 +26,7 @@ func New(db *sql.DB, dialect dialect.Dialect) *Session {
 func (s *Session) Clear() {
 	s.sql.Reset()
 	s.sqlVars = nil
+	s.caluse = caluse.Caluse{}
 }
 
 func (s *Session) DB() *sql.DB {

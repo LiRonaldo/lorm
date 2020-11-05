@@ -2,8 +2,8 @@ package session
 
 import (
 	"database/sql"
+	"fmt"
 	"lorm/day3-save-query/dialect"
-	"lorm/day3-save-query/log"
 	"testing"
 )
 
@@ -19,8 +19,7 @@ var (
 )
 
 func TestSession_Exec(t *testing.T) {
-	db, err := sql.Open("mysql", "root:123456@tcp(localhost:3306)/lorm?charset=utf8")
-	log.Error(err)
+	db, _ := sql.Open("mysql", "root:123456@tcp(localhost:3306)/lorm?charset=utf8")
 	TestDial, _ := dialect.GetDialect("mysql")
 	s := New(db, TestDial).Model(&User{})
 	_ = s.DropTable()
