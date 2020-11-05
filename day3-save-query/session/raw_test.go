@@ -21,9 +21,16 @@ var (
 func TestSession_Exec(t *testing.T) {
 	db, _ := sql.Open("mysql", "root:123456@tcp(localhost:3306)/lorm?charset=utf8")
 	TestDial, _ := dialect.GetDialect("mysql")
-	s := New(db, TestDial).Model(&User{}).refTable
-	values := s.RecordValues(user1)
-	fmt.Println(values)
+	s := New(db, TestDial).Model(&User{})
+	num, _ := s.Insert(user1, user2)
+	fmt.Println(num)
+	var users []User
+	//传切片地址，防止扩容。
+	if err := s.Find(&users); err != nil {
+		t.Fatal("failed to query all")
+	}
+	fmt.Println(users)
+
 }
 func Test_Init(t *testing.T) {
 	db, _ := sql.Open("sqlite3", "../../gweb.db")
