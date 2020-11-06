@@ -37,8 +37,8 @@ func (s *Session) Update(kv ...interface{}) (int64, error) {
 		}
 	}
 	s.caluse.Set(caluse.UPDATE, s.RefTable().Name, m)
-	sql, vars := s.caluse.Build(caluse.UPDATE, caluse.UPDATE)
-	result, err := s.Raw(sql, vars).Exec()
+	sql, vars := s.caluse.Build(caluse.UPDATE, caluse.WHERE)
+	result, err := s.Raw(sql, vars...).Exec()
 	if err != nil {
 		return 0, err
 	}
@@ -49,7 +49,7 @@ func (s *Session) Update(kv ...interface{}) (int64, error) {
 func (s *Session) Delete() (int64, error) {
 	s.caluse.Set(caluse.DELETE, s.RefTable().Name)
 	sql, vars := s.caluse.Build(caluse.DELETE, caluse.WHERE)
-	result, err := s.Raw(sql, vars).Exec()
+	result, err := s.Raw(sql, vars...).Exec()
 	if err != nil {
 		return 0, err
 	}
@@ -60,7 +60,7 @@ func (s *Session) Delete() (int64, error) {
 func (s *Session) Count() (int64, error) {
 	s.caluse.Set(caluse.COUNT, s.RefTable().Name)
 	sql, vars := s.caluse.Build(caluse.COUNT, caluse.WHERE)
-	row := s.Raw(sql, vars).QueryRow()
+	row := s.Raw(sql, vars...).QueryRow()
 	var num int64
 	if err := row.Scan(&num); err != nil {
 		return 0, err
@@ -77,7 +77,7 @@ func (s *Session) Limit(num interface{}) *Session {
 //where
 func (s *Session) Where(desc string, args ...interface{}) *Session {
 	var vars []interface{}
-	s.caluse.Set(caluse.WHERE, append(append(vars, desc), args))
+	s.caluse.Set(caluse.WHERE, append(append(vars, desc), args...)...)
 	return s
 }
 

@@ -23,4 +23,6 @@ func TestEngine_NewSession(t *testing.T) {
 	var users []User
 	s.Limit(1).Find(&users)
 	fmt.Println(users)
+	s.Where("Name = ?", "liyuxiang1").Delete()
+	s.Where("Name = ?", "duxiufeng").Update("Age = ", 50)
 }
