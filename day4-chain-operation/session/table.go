@@ -80,4 +80,5 @@ func (s *Session) Find(values interface{}) error {
 		destSlice.Set(reflect.Append(destSlice, dest))
 	}
 	return rows.Close()
+
 }

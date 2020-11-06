@@ -49,7 +49,7 @@ func (s *Session) Exec() (result sql.Result, err error) {
 	return
 }
 
-//查询一条记录
+//查询一条记录,或者使用count的语法
 func (s *Session) QueryRow() *sql.Row {
 	defer s.Clear()
 	log.Info(s.sql.String(), s.sqlVars)
