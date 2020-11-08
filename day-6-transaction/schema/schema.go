@@ -2,7 +2,7 @@ package schema
 
 import (
 	"go/ast"
-	"lorm/day5-hooks/dialect"
+	"lorm/day-6-transaction/dialect"
 	"reflect"
 )
 

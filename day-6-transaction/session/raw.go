@@ -3,10 +3,10 @@ package session
 import (
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
-	"lorm/day5-hooks/caluse"
-	"lorm/day5-hooks/dialect"
-	"lorm/day5-hooks/log"
-	"lorm/day5-hooks/schema"
+	"lorm/day-6-transaction/caluse"
+	"lorm/day-6-transaction/dialect"
+	"lorm/day-6-transaction/log"
+	"lorm/day-6-transaction/schema"
 	"strings"
 )
 
@@ -17,6 +17,7 @@ type Session struct {
 	dialect  dialect.Dialect
 	refTable *schema.Schema
 	caluse   caluse.Caluse
+	tx       *sql.Tx
 }
 
 func New(db *sql.DB, dialect dialect.Dialect) *Session {

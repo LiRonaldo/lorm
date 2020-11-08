@@ -1,7 +1,7 @@
 package session
 
 import (
-	"lorm/day5-hooks/log"
+	"lorm/day-6-transaction/log"
 	"reflect"
 )
 

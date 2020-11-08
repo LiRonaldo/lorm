@@ -2,8 +2,8 @@ package session
 
 import (
 	"fmt"
-	"lorm/day5-hooks/log"
-	"lorm/day5-hooks/schema"
+	"lorm/day-6-transaction/log"
+	"lorm/day-6-transaction/schema"
 	"reflect"
 	"strings"
 )

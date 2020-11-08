@@ -3,9 +3,9 @@ package lorm
 import (
 	"database/sql"
 	_ "github.com/mattn/go-sqlite3"
-	"lorm/day5-hooks/dialect"
-	"lorm/day5-hooks/log"
-	"lorm/day5-hooks/session"
+	"lorm/day-6-transaction/dialect"
+	"lorm/day-6-transaction/log"
+	"lorm/day-6-transaction/session"
 )
 
 type Engine struct {

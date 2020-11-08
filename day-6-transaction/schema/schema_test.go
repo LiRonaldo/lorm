@@ -1,7 +1,7 @@
 package schema
 
 import (
-	"lorm/day5-hooks/dialect"
+	"lorm/day-6-transaction/dialect"
 	"testing"
 )
 
