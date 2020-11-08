@@ -1,7 +1,9 @@
 package lorm
 
 import (
+	"errors"
 	"fmt"
+	"lorm/day-6-transaction/session"
 	"testing"
 )
 
@@ -25,4 +27,12 @@ func TestEngine_NewSession(t *testing.T) {
 	fmt.Println(users)
 	s.Where("Name = ?", "liyuxiang1").Delete()
 	s.Where("Name = ?", "duxiufeng").Update("Age = ", 50)
+}
+
+func Test_transaction(t *testing.T) {
+	e, _ := NewEngine("mysql", "root:123456@tcp(localhost:3306)/lorm?charset=utf8")
+	e.Transaction(func(session *session.Session) (i interface{}, err error) {
+		session.Insert(user2)
+		return nil, errors.New("插入报错！")
+	})
 }

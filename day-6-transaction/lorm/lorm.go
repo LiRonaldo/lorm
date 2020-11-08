@@ -8,6 +8,7 @@ import (
 	"lorm/day-6-transaction/session"
 )
 
+type TxFunc func(*session.Session) (interface{}, error)
 type Engine struct {
 	db      *sql.DB
 	dialect dialect.Dialect
@@ -42,4 +43,23 @@ func (e *Engine) Close() {
 
 func (e *Engine) NewSession() (s *session.Session) {
 	return session.New(e.db, e.dialect)
+}
+
+//一键式调用
+func (e *Engine) Transaction(txFunc TxFunc) (result interface{}, err error) {
+	s := e.NewSession()
+	if err := s.Begin(); err != nil {
+		return nil, err
+	}
+	defer func() {
+		if p := recover(); p != nil {
+			_ = s.Rollback()
+			panic(p)
+		} else if err != nil {
+			_ = s.Rollback()
+		} else {
+			err = s.Commit()
+		}
+	}()
+	return txFunc(s)
 }

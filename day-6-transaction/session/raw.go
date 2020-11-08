@@ -20,6 +20,17 @@ type Session struct {
 	tx       *sql.Tx
 }
 
+//范继承，因为*sql.db和*sql.tx都重写了这三个方法。commdb属于父类。
+type CommonDB interface {
+	Query(query string, args ...interface{}) (*sql.Rows, error)
+	QueryRow(query string, args ...interface{}) *sql.Row
+	Exec(query string, args ...interface{}) (sql.Result, error)
+}
+
+//测试*sql.db 和*sql.tx能不能强转成父类
+var _ CommonDB = (*sql.DB)(nil)
+var _ CommonDB = (*sql.Tx)(nil)
+
 func New(db *sql.DB, dialect dialect.Dialect) *Session {
 	return &Session{db: db, dialect: dialect}
 }
@@ -30,7 +41,10 @@ func (s *Session) Clear() {
 	s.caluse = caluse.Caluse{}
 }
 
-func (s *Session) DB() *sql.DB {
+func (s *Session) DB() CommonDB {
+	if s.tx != nil {
+		return s.tx
+	}
 	return s.db
 }
 func (s *Session) Raw(sql string, values ...interface{}) *Session {

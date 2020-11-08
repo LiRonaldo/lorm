@@ -27,7 +27,7 @@ func (u *User) AfterQuery(s *Session) error {
 func TestSession_Exec(t *testing.T) {
 	db, _ := sql.Open("mysql", "root:123456@tcp(localhost:3306)/lorm?charset=utf8")
 	TestDial, _ := dialect.GetDialect("mysql")
-	s := New(db, TestDial).Model(&User{})
+	_ = New(db, TestDial).Model(&User{})
 	/*num, _ := s.Insert(user1, user2)
 	fmt.Println(num)*/
 	//var users []User
@@ -35,9 +35,9 @@ func TestSession_Exec(t *testing.T) {
 	/*if err := s.Limit(1).Find(&users); err != nil {
 		t.Fatal("failed to query all")
 	}*/
-	user := &User{}
+	/*user := &User{}
 	s.First(user)
-	fmt.Println(user.Name)
+	fmt.Println(user.Name)*/
 
 }
 func Test_Init(t *testing.T) {
