@@ -44,5 +44,5 @@ func (s *Session) HasTable() bool {
 	row := s.Raw(sql, values...).QueryRow()
 	var tmp string
 	_ = row.Scan(&tmp)
-	return tmp == s.RefTable().Name
+	return strings.ToTitle(tmp) == strings.ToTitle(s.RefTable().Name)
 }

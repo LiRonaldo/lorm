@@ -2,6 +2,7 @@ package session
 
 import (
 	"database/sql"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"lorm/day-6-transaction/caluse"
 	"lorm/day-6-transaction/dialect"
@@ -58,6 +59,7 @@ func (s *Session) Raw(sql string, values ...interface{}) *Session {
 func (s *Session) Exec() (result sql.Result, err error) {
 	defer s.Clear()
 	log.Info(s.sql.String(), s.sqlVars)
+	fmt.Println(s.sql.String())
 	if result, err = s.DB().Exec(s.sql.String(), s.sqlVars...); err != nil {
 		log.Error(err)
 	}
